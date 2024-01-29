@@ -155,5 +155,5 @@ def check_loss(grid): # This function checks if the game is over due to no more 
             # checks if the current cell (grid[i][j]) is not in the last column (j != 3)
             # and if the value of the current cell is equal to the value of the cell directly to its right (grid[i][j+1])
             if j != 3 and grid[i][j] == grid[i][j + 1]:
-                return False
+                return False 
     return True
