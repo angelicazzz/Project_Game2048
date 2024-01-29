@@ -12,16 +12,10 @@ import random
 
 def initialize_grid():
     grid = [[0] * 4 for _ in range(4)]  # list comprehension: [0]*4 represent [0,0,0,0]
-    for _ in range(
-        2
-    ):  # The underscore _ is a convention often used in Python to indicate a variable that is not going to be used within the loop.
+    for _ in range(2):  # The underscore _ is a convention often used in Python to indicate a variable that is not going to be used within the loop.
         # Since we don't need the loop variable (just the iteration itself), _ is used as a placeholder.
-        row = random.randint(
-            0, 3
-        )  # generates random row and column indices within the range [0, 3] (inclusive).
-        col = random.randint(
-            0, 3
-        )  # because the grid is 4x4, so the valid indices range from 0 to 3.
+        row = random.randint(0, 3)  # generates random row and column indices within the range [0, 3] (inclusive).
+        col = random.randint(0, 3)  # because the grid is 4x4, so the valid indices range from 0 to 3.
 
         while (
             grid[row][col] != 0
@@ -29,9 +23,7 @@ def initialize_grid():
             # ensures that the new random position chosen is an empty cell in the grid.
             col = random.randint(0, 3)
             row = random.randint(0, 3)
-        grid[row][
-            col
-        ] = 2  # Once an empty cell is found, this line assigns the value 2 to that cell.
+        grid[row][col] = 2  # Once an empty cell is found, this line assigns the value 2 to that cell.
     return grid
 
 
@@ -41,17 +33,11 @@ def print_grid(grid):
             "|", end=""
         )  # | at beginning of each row. The end="" argument ensures that the subsequent prints in the same line instead of moving to the next line.
         for num in row:
-            if (
-                num == 0
-            ):  # if the current number (num) is equal to 0, replaced by a formatted string period (.) with width of 4 characters.
-                print(
-                    "{:>4}".format("."), end=""
-                )  # The > aligns the content to the right within the specified width of 4 characters.
+            if num == 0:  # if the current number (num) is equal to 0, replaced by a formatted string period (.) with width of 4 characters.
+                print("{:>4}".format("."), end="")  # The > aligns the content to the right within the specified width of 4 characters.
             else:
                 print("{:>4}".format(num), end="")
-        print(
-            " |"
-        )  # After printing all the elements in the current row, | at the end of the row, indicating the end of that row.
+        print(" |")  # After printing all the elements in the current row, | at the end of the row, indicating the end of that row.
 
 
 def generate_new_cell(grid):
@@ -60,9 +46,7 @@ def generate_new_cell(grid):
     # If it is, it adds the tuple (i, j) representing the coordinates of that empty cell to the list empty_cells.
     empty_cells = [(i, j) for i in range(4) for j in range(4) if grid[i][j] == 0]
 
-    if (
-        empty_cells
-    ):  # empty_cells will contain the coordinates of all the empty cells in the grid, checks if empty_cells is not empty
+    if empty_cells:  # empty_cells will contain the coordinates of all the empty cells in the grid, checks if empty_cells is not empty
         row, col = random.choice(
             empty_cells
         )  # selects a random empty cell from empty_cells, assigns the row index to row and the column index to col.
@@ -76,17 +60,13 @@ def generate_new_cell(grid):
 
 def move_left(grid):
     for i in range(4):  # iterates over each row of the grid.
-        for j in range(
-            3
-        ):  # iterates over each column of the grid from left to right, except for the last column.
+        for j in range(3):  # iterates over each column of the grid from left to right, except for the last column.
             # because the movement operation is performed by comparing each cell with the cell to its immediate right.
             # Since there is no cell to the right of the last column, there's no need to perform this comparison for the cells in the last column.
             for k in range(
                 j + 1, 4
             ):  # The variable k represents the index of the column being compared to the current column j which is the right column
-                if (
-                    grid[i][k] != 0
-                ):  # if the right cell is not equal to 0, indicating that there is a non-empty cell to current's right.
+                if grid[i][k] != 0:  # if the right cell is not equal to 0, indicating that there is a non-empty cell to current's right.
 
                     # if current cell is 0(empty)
                     # moves the right's value (grid[i][k]) into the current cell (grid[i][j])
@@ -107,15 +87,11 @@ def move_left(grid):
 
 def move_right(grid):
     for i in range(4):  # iterates over each row of the grid
-        for j in range(
-            3, 0, -1
-        ):  # iterates over each column of the grid from right to left, except for the first column.
+        for j in range(3, 0, -1):  # iterates over each column of the grid from right to left, except for the first column.
             # because the movement operation is performed by comparing each cell with the cell to its immediate left.
             # Since there is no cell to the left of the first column, there's no need to perform this comparison for the cells in the first column.
             # range(3, 0, -1) generates the sequence [3, 2, 1], iterating from the third column to the first column in reverse order.
-            for k in range(
-                j - 1, -1, -1
-            ):  # generates a sequence starting from j - 1 and ending at -1, iterating in reverse order.
+            for k in range(j - 1, -1, -1):  # generates a sequence starting from j - 1 and ending at -1, iterating in reverse order.
                 # This ensures that k iterates over the columns to the left of j, including j - 1, down to the first column (0).
                 # sequence for k is [2, 1, 0]
                 if grid[i][k] != 0:  # if the left cell is not-empty
@@ -134,14 +110,10 @@ def move_right(grid):
 
 def move_up(grid):
     for j in range(4):  # iterates over each column of the grid.
-        for i in range(
-            3
-        ):  # iterates over each row of the grid from top to buttom, except for the last row.
+        for i in range(3):  # iterates over each row of the grid from top to buttom, except for the last row.
             # because the movement operation is performed by comparing each cell with the cell to its immediate below.
             # Since there is no cell to the below of the last row, there's no need to perform this comparison for the cells in the last row.
-            for k in range(
-                i + 1, 4
-            ):  # range(i + 1, 4) generates the sequence [i + 1, i + 2, i + 3],
+            for k in range(i + 1, 4):  # range(i + 1, 4) generates the sequence [i + 1, i + 2, i + 3],
                 # iterating from the row below the current row (i) up to the last row of the grid.
                 if grid[k][j] != 0:  # if the below cell is not-empty
 
@@ -159,9 +131,7 @@ def move_up(grid):
 
 def move_down(grid):
     for j in range(4):  # iterates over each column of the grid.
-        for i in range(
-            3, 0, -1
-        ):  # iterates over each row of the grid from buttom to top except for the first row.
+        for i in range(3, 0, -1):  # iterates over each row of the grid from buttom to top except for the first row.
             # range(3, 0, -1) generates the sequence [3, 2, 1], iterating from the third row to the second row in reverse order.
             for k in range(
                 i - 1, -1, -1
@@ -190,14 +160,12 @@ def check_win(grid):
     return False
 
 
-def check_loss(grid):  # This function checks if the game is over due to no more valid moves
+def check_loss(
+    grid,
+):  # This function checks if the game is over due to no more valid moves
     for i in range(4):
-        for j in range(
-            4
-        ):  # iterate over each cell of the grid. i and j represent the row and column indices, respectively.
-            if (
-                grid[i][j] == 0
-            ):  # if the current cell (grid[i][j]) contains a value of 0, indicating an empty cell.
+        for j in range(4):  # iterate over each cell of the grid. i and j represent the row and column indices, respectively.
+            if grid[i][j] == 0:  # if the current cell (grid[i][j]) contains a value of 0, indicating an empty cell.
                 return False  # if any cell in the grid is empty, the game is not lost, so the function immediately returns False.
 
             # checks if the current cell (grid[i][j]) is not in the last row (i != 3)
